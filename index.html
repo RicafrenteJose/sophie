@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Love</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Code Screen -->
+  <div id="codeScreen">
+    <div class="code-container">
+      <h2>Enter the Secret Code 💗</h2>
+      <input id="codeInput" placeholder="Enter code..." />
+      <button id="enterBtn">Enter</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div id="mainContent">
+    <!-- Welcome Section -->
+    <div id="welcomeSection">
+      <h1>Enjoy Your Stay, Mahal 💕</h1>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+      <a onclick="showSection('letter')">Letter</a>
+      <a onclick="showSection('notes')">Notes</a>
+      <a onclick="showSection('gallery')">Gallery</a>
+      <a onclick="showSection('music')">Music</a>
+    </nav>
+
+    <div id="letter" class="section">
+      <h2>💌 Letter</h2>
+      <p>Happy birthday, my love. I just want you to know how grateful I am to have you in my life. 
+        Sobrang thankful ako sa’yo because you always bring me comfort and happiness, even on days when I’m not okay. 
+        Thank you for your patience, for your love, and for the way you make me feel so special.
+       You deserve all the happiness today. Sana ma-feel mo yung peace, warmth, and joy na lagi mong binibigay sa iba. 
+       I’m always here for you, supporting you, taking care of you, and loving you with everything I have.</p>
+    </div>
+
+    <div id="notes" class="section">
+      <h2>📝 Notes</h2>
+      <p>☑ Drink water always<br>
+      ☑ Stay pretty always<br>
+      ☑ Be happy, kahit konti lang pag bad day<br>
+      ☑ Eat your meals, no skipping<br>
+      ☑ Get enough rest<br>
+      ☑ Take care of yourself<br>
+      ☑ Don’t overthink too much<br>
+      ☑ Remember that I love you</p>
+    </div>
+
+    <div id="gallery" class="section">
+      <h2>📷 Gallery</h2>
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="images/3rdsof.jpg" alt="Our Special Day">
+          <div class="gallery-caption">Our Special Day</div>
+        </div>
+        <div class="gallery-card">
+          <img src="images/IMG_0373.PNG" alt="Our Special Moment">
+          <div class="gallery-caption">Our Special Moment</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="music" class="section">
+      <h2>🎵 Music</h2>
+      <div class="gallery-grid">
+        <div class="music-card">
+          <img src="images/Daylight _ The Eras Tour _ Minneapolis Night 2 _ Surprise Acoustic Song Cassette Tape Sticker.jpg" alt="Daylight">
+          <div class="music-overlay">
+            <h3>Daylight</h3>
+            <p>Taylor Swift</p>
+            <div class="play-button">▶</div>
+          </div>
+        </div>
+        <div class="music-card">
+          <img src="images/Lover cassette by LilBitStickers _ Redbubble.jpg" alt="Lover">
+          <div class="music-overlay">
+            <h3>Lover</h3>
+            <p>Taylor Swift</p>
+            <div class="play-button">▶</div>
+          </div>
+        </div>
+        <div class="music-card">
+          <img src="images/Deja vu song.jpg" alt="Deja vu">
+          <div class="music-overlay">
+            <h3>Deja Vu</h3>
+            <p>Olivia Rodrigo</p>
+            <div class="play-button">▶</div>
+          </div>
+        </div>
+        <div class="music-card">
+          <img src="images/Taylor Swift Merch_ Must-Have Items for Fans.jpg" alt="Swifties On Top">
+          <div class="music-overlay">
+            <h3>Swifties On Top</h3>
+            <p>Taylor Swift</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Finish Button -->
+  <div class="finish-container">
+    <button id="finishBtn" class="finish-button">I'm Finished</button>
+  </div>
+
+  <!-- Love Message Popup -->
+  <div id="loveMessage" class="love-message">
+    <div class="love-message-content">
+      <div class="heart-emoji">💖</div>
+      <h2>I Love You Always, Love</h2>
+      <p>Thank you for being you, for your love, and for every moment we share. You are my everything. 💝</p>
+      <button class="close-message">❤️ Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Show/hide finish button based on active section
+    function updateFinishButton() {
+      const finishBtn = document.querySelector('.finish-container');
+      const musicSection = document.getElementById('music');
+      const rect = musicSection.getBoundingClientRect();
+      
+      // Show finish button only when music section is in view
+      if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+        finishBtn.style.display = 'block';
+        // Add a small delay before showing to ensure smooth transition
+        setTimeout(() => finishBtn.classList.add('visible'), 50);
+      } else {
+        finishBtn.classList.remove('visible');
+        // Only hide after the fade out transition completes
+        setTimeout(() => {
+          if (!finishBtn.classList.contains('visible')) {
+            finishBtn.style.display = 'none';
+          }
+        }, 500); // Match this with the CSS transition time
+      }
+    }
+
+    // Add scroll event listener
+    window.addEventListener('scroll', updateFinishButton);
+    
+    // Initial check
+    document.addEventListener('DOMContentLoaded', function() {
+      updateFinishButton();
+      
+      // Show love message when finish button is clicked
+      document.getElementById('finishBtn').addEventListener('click', function() {
+        document.getElementById('loveMessage').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
+      });
+
+      // Close message when clicking the close button
+      document.querySelector('.close-message').addEventListener('click', function() {
+        document.getElementById('loveMessage').style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+      });
+
+      // Close message when clicking outside the content
+      document.getElementById('loveMessage').addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.style.display = 'none';
+          document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+      });
+
+      // Update finish button visibility when navigating to music section
+      document.querySelector('a[href="#music"]').addEventListener('click', function() {
+        setTimeout(updateFinishButton, 100); // Small delay to allow scroll to complete
+      });
+    });
+
+    // Secret Code
+    const correctCode = "I Love You"; // you can change this
+
+    document.getElementById("enterBtn").addEventListener("click", () => {
+      const input = document.getElementById("codeInput").value;
+      if (input === correctCode) {
+        document.getElementById("codeScreen").style.display = "none";
+        const mainContent = document.getElementById("mainContent");
+        mainContent.style.display = "block";
+        // Trigger reflow to ensure the element is rendered before adding class
+        void mainContent.offsetWidth;
+        mainContent.classList.add("show-nav");
+      } else {
+        alert("Wrong code, love 🙈");
+      }
+    });
+
+    // Show Sections
+    function showSection(id) {
+      document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
+      document.getElementById(id).style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
